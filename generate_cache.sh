@@ -7,7 +7,6 @@ rm CMakeCache.txt
 cmakeArgs=(
     -DCMAKE_BUILD_TYPE=$1
     -DBUILD_SHARED_LIBS=OFF
-    -DBUILD_CLAR=OFF
     -DBUILD_EXAMPLES=OFF
     -DUSE_BUNDLED_ZLIB=ON
     -DREGEX_BACKEND=builtin

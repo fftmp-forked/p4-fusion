@@ -13,7 +13,6 @@ project(
     DESCRIPTION "Custom tool to convert P4 depots to Git repositories using the Helix Core C++ API"
 )
 
-set(BUILD_CLAR OFF)
 set(BUILD_SHARED_LIBS OFF)
 
 set(HELIX_API vendor/helix-core-api/$<IF:$<PLATFORM_ID:Darwin>,mac,linux>)
