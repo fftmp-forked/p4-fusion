@@ -5,7 +5,6 @@ if (NOT OPENSSL_ROOT_DIR)
     set(OPENSSL_ROOT_DIR /usr/local/ssl)
 endif()
 
-set(OPENSSL_USE_STATIC_LIBS true)
 find_package(OpenSSL)
 
 add_executable(p4-fusion ${Headers} ${Sources})
