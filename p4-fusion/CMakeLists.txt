@@ -49,5 +49,7 @@ target_link_libraries(p4-fusion PUBLIC
     ${OPENSSL_SSL_LIBRARIES}
     ${OPENSSL_CRYPTO_LIBRARIES}
     git2
-    minitrace
 )
+if(MTR_ENABLED)
+    target_link_libraries(p4-fusion minitrace)
+endif()

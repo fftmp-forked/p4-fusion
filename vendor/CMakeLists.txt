@@ -1,2 +1,5 @@
 add_subdirectory(libgit2)
-add_subdirectory(minitrace)
+
+if(MTR_ENABLED)
+    add_subdirectory(minitrace)
+endif()

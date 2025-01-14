@@ -189,11 +189,13 @@ int Main(int argc, char** argv)
 		return 1;
 	}
 
+#if MTR_ENABLED
 	// Setup trace file generation
 	mtr_init((srcPath + (srcPath.back() == '/' ? "" : "/") + "trace.json").c_str());
 	MTR_META_PROCESS_NAME("p4-fusion");
 	MTR_META_THREAD_NAME("Main Thread");
 	MTR_META_THREAD_SORT_INDEX(0);
+#endif
 
 	std::string resumeFromCL;
 	if (git.IsHEADExists())
@@ -364,11 +366,13 @@ int Main(int argc, char** argv)
 			downloadCL.StartDownload(printBatch);
 		}
 
+#if MTR_ENABLED
 		// Occasionally flush the profiling data
 		if ((i % flushRate) == 0)
 		{
 			mtr_flush();
 		}
+#endif
 
 		// Deallocate this CL's metadata from memory
 		cl.Clear();
@@ -384,8 +388,10 @@ int Main(int argc, char** argv)
 		return 1;
 	}
 
+#if MTR_ENABLED
 	mtr_flush();
 	mtr_shutdown();
+#endif
 
 	return 0;
 }
