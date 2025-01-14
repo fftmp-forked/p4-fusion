@@ -16,14 +16,25 @@ project(
 set(BUILD_CLAR OFF)
 set(BUILD_SHARED_LIBS OFF)
 
-if (UNIX)
-    set(HELIX_API vendor/helix-core-api/linux)
+set(HELIX_API vendor/helix-core-api/$<IF:$<PLATFORM_ID:Darwin>,mac,linux>)
+
+
+if (NOT OPENSSL_ROOT_DIR)
+    set(OPENSSL_ROOT_DIR /usr/local/ssl)
 endif()
-if (APPLE)
-    set(HELIX_API vendor/helix-core-api/mac)
+find_package(OpenSSL)
+
+find_package(PkgConfig)
+pkg_check_modules(LIBGIT2 libgit2)
+if(NOT LIBGIT2_FOUND)
+    message("libgit2 not found, compile own version")
+    add_subdirectory(vendor/libgit2)
 endif()
 
-add_subdirectory(vendor)
+if(MTR_ENABLED)
+    add_subdirectory(vendor/minitrace)
+endif()
+
 add_subdirectory(p4-fusion)
 
 if (BUILD_TESTS)
